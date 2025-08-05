@@ -1,6 +1,8 @@
 import { ApiError } from "../lib/ApiError.js";
 import { asyncHandler } from "../lib/asyncHandler.js";
 import User from "../models/user.model.js";
+import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const getUsersForSidebar = asyncHandler(async(req, res) => {
     try {
@@ -9,6 +11,55 @@ export const getUsersForSidebar = asyncHandler(async(req, res) => {
     
         res.status(200).json(filteredUsers);
     } catch (error) {
-        throw new ApiError(500, error?.message || "Internal server error")
+        throw new ApiError(500, error?.message || "Internal server error: getUsersForSidebar")
     };
 });
+
+export const getMessages = asyncHandler(async(req, res) => {
+    try {
+        const { id:userToChatId } = req.params;
+        const myId = req.user._id;
+    
+        const messages = await Message.find({
+            $or: [
+                { senderId: myId, receiverId: userToChatId },
+                { senderId: userToChatId, receiverId: myId },
+            ],
+        });
+    
+        res.status(200).json(messages);
+    } catch (error) {
+        throw new ApiError(500, error?.message || "Internal server error : getMessages");
+    }
+});
+
+export const sendMessage = asyncHandler(async(req,res) => {
+    try {
+        const { text, image } = req.body;
+        const { id: receiverId } = req.params;
+        const senderId = req.user._id;
+    
+        let imageUrl;
+        if(image){
+            const uploadResponse = await cloudinary.uploader.upload(image);
+            imageUrl= uploadResponse.secure_url;
+        }
+    
+        const newMessage = new Message({
+            senderId,
+            receiverId,
+            text,
+            image: imageUrl, 
+        });
+    
+        await newMessage.save();
+        //socket-io functionality
+    
+        res.status(201).json(newMessage);
+
+    } catch (error) {
+        throw new ApiError(500, error?.message || "Internal server error: sendMessage");
+    }
+
+
+})
