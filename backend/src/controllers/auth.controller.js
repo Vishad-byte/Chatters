@@ -54,11 +54,13 @@ export const login = asyncHandler (async (req, res) =>{
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if(!user){
+        console.log("Throwing: This user is not registered");
         throw new ApiError(401, "This user is not registered")
     }
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if(!isPasswordCorrect){
-        throw new ApiError(401, "Enter correct password")
+        console.log("Throwing: Invalid credentials"); // Debug log
+        throw new ApiError(401, "Invalid credentials")
     }
 
     generateToken(user._id, res);
