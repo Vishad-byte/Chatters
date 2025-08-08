@@ -24,7 +24,7 @@ import messageRoutes from "./routes/message.routes.js";
 
 //Router declaration
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/message", messageRoutes);
+app.use("/api/v1/messages", messageRoutes);
 
 app.use(errorHandler);
 
