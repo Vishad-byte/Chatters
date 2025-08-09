@@ -3,6 +3,7 @@ import { asyncHandler } from "../lib/asyncHandler.js";
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export const getUsersForSidebar = asyncHandler(async(req, res) => {
     try {
@@ -53,7 +54,14 @@ export const sendMessage = asyncHandler(async(req,res) => {
         });
     
         await newMessage.save();
+
         //socket-io functionality
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage)
+        }
     
         res.status(201).json(newMessage);
 
