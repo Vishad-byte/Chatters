@@ -7,10 +7,10 @@ const ProfilePage = () => {
   const [selectedImg, setSelectedImg] = useState(null);
 
   useEffect(() => {
-    if (!authUser?.createdAt) {
+    if (!authUser?.createdAt && isCheckingAuth) {
       checkAuth();
     }
-  }, [authUser?.createdAt, checkAuth]);
+  }, []);
 
   const handleImageUpload = async(e) => {
     const file = e.target.files[0];
