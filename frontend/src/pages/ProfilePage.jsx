@@ -10,7 +10,7 @@ const ProfilePage = () => {
     if (!authUser?.createdAt && isCheckingAuth) {
       checkAuth();
     }
-  }, []);
+  }, [authUser?.createdAt]);
 
   const handleImageUpload = async(e) => {
     const file = e.target.files[0];
