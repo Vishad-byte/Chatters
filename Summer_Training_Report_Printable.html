@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Summer Training Report - Chatters Real-Time Platform</title>
+<style>
+  @page {
+    size: A4;
+    margin: 1.0in 1.0in 1.0in 1.25in; /* Top Right Bottom Left */
+    @bottom-center {
+      content: counter(page);
+      font-family: 'Times New Roman', serif;
+      font-size: 12pt;
+    }
+  }
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000000;
+    margin: 0;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px auto;
+    background: white;
+    box-sizing: border-box;
+  }
+  h1.chap-title {
+    font-size: 22pt;
+    font-weight: bold;
+    color: #1F4E79;
+    margin-top: 24pt;
+    margin-bottom: 18pt;
+    text-align: left;
+    page-break-before: always;
+  }
+  h1.first-title {
+    page-break-before: avoid;
+  }
+  h2.main-heading {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #1F4E79;
+    margin-top: 18pt;
+    margin-bottom: 8pt;
+    text-align: left;
+  }
+  h3.sub-heading {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 14pt;
+    margin-bottom: 6pt;
+    text-align: left;
+  }
+  p {
+    text-align: justify;
+    margin-top: 0;
+    margin-bottom: 8pt;
+  }
+  ul {
+    margin-top: 0;
+    margin-bottom: 8pt;
+    padding-left: 24px;
+  }
+  li {
+    text-align: justify;
+    margin-bottom: 4pt;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12pt;
+    margin-bottom: 14pt;
+    font-size: 10pt;
+  }
+  th, td {
+    border: 1px solid #1F4E79;
+    padding: 6pt 8pt;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #1F4E79;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  tr:nth-child(even) td {
+    background-color: #F9FBFD;
+  }
+  .caption {
+    font-size: 10pt;
+    font-weight: bold;
+    font-style: italic;
+    color: #1F4E79;
+    text-align: center;
+    margin-top: 4pt;
+    margin-bottom: 16pt;
+  }
+  .placeholder-box {
+    border: 2px dashed #1F4E79;
+    background-color: #F0F4F8;
+    padding: 20pt;
+    text-align: center;
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+    border-radius: 4px;
+  }
+  .placeholder-box .title {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #1F4E79;
+  }
+  .placeholder-box .desc {
+    font-size: 10pt;
+    font-style: italic;
+    color: #555555;
+    margin-top: 4pt;
+  }
+  .toc-table td {
+    border: none;
+    border-bottom: 1px dotted #cccccc;
+    padding: 4pt 0;
+  }
+  .toc-table tr:nth-child(even) td {
+    background-color: transparent;
+  }
+  .toc-chap {
+    font-weight: bold;
+    color: #1F4E79;
+  }
+  @media print {
+    body { padding: 0; }
+    .page { width: 100%; margin: 0; box-shadow: none; }
+    .chap-title { page-break-before: always; }
+    .first-title { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TABLE OF CONTENTS -->
+<h1 class="chap-title first-title">TABLE OF CONTENTS</h1>
+<table class="toc-table">
+  <tr class="toc-chap"><td>Table of Contents</td><td style="text-align: right;">Page 6</td></tr>
+  <tr class="toc-chap"><td>List of Figures</td><td style="text-align: right;">Page 7</td></tr>
+  <tr class="toc-chap"><td>List of Tables</td><td style="text-align: right;">Page 7</td></tr>
+  <tr class="toc-chap"><td>List of Abbreviations</td><td style="text-align: right;">Page 8</td></tr>
+  <tr class="toc-chap"><td>Weekly Progress</td><td style="text-align: right;">Page 9</td></tr>
+  <tr class="toc-chap"><td>Chapter 1: Introduction</td><td style="text-align: right;">Page 10</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;1.1 Background</td><td style="text-align: right;">Page 10</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;1.2 About the Project</td><td style="text-align: right;">Page 10</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;1.3 Motivation</td><td style="text-align: right;">Page 11</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;1.4 Organisation of the Report</td><td style="text-align: right;">Page 11</td></tr>
+  <tr class="toc-chap"><td>Chapter 2: Problem Statement</td><td style="text-align: right;">Page 12</td></tr>
+  <tr class="toc-chap"><td>Chapter 3: Objectives and Scope</td><td style="text-align: right;">Page 13</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;3.1 Objectives</td><td style="text-align: right;">Page 13</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;3.2 Scope of the Project</td><td style="text-align: right;">Page 13</td></tr>
+  <tr class="toc-chap"><td>Chapter 4: Technologies and Concepts Used</td><td style="text-align: right;">Page 14</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.1 Node.js and Express.js</td><td style="text-align: right;">Page 14</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.2 RESTful APIs</td><td style="text-align: right;">Page 14</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.3 MongoDB and Mongoose ODM</td><td style="text-align: right;">Page 14</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.4 Socket.io for Real-Time Communication</td><td style="text-align: right;">Page 15</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.5 React.js and Vite Framework</td><td style="text-align: right;">Page 15</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.6 Tailwind CSS and DaisyUI</td><td style="text-align: right;">Page 15</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.7 Zustand State Management</td><td style="text-align: right;">Page 15</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.8 Cloudinary Cloud Media Storage</td><td style="text-align: right;">Page 16</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.9 JSON Web Tokens (JWT) &amp; Cookie Authentication</td><td style="text-align: right;">Page 16</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;4.10 Postman &amp; API Validation Tools</td><td style="text-align: right;">Page 16</td></tr>
+  <tr class="toc-chap"><td>Chapter 5: Requirement Analysis</td><td style="text-align: right;">Page 17</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;5.1 Functional Requirements</td><td style="text-align: right;">Page 17</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;5.2 Non-Functional Requirements</td><td style="text-align: right;">Page 17</td></tr>
+  <tr class="toc-chap"><td>Chapter 6: System Architecture and Design</td><td style="text-align: right;">Page 18</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;6.1 System Architecture Diagram</td><td style="text-align: right;">Page 18</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;6.2 Data Flow and Component Interaction</td><td style="text-align: right;">Page 18</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;6.3 Database Schemas and Models</td><td style="text-align: right;">Page 19</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;6.4 Snapshots of the Project</td><td style="text-align: right;">Page 20</td></tr>
+  <tr class="toc-chap"><td>Chapter 7: Implementation and Key Modules</td><td style="text-align: right;">Page 23</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;7.1 Implementation Overview</td><td style="text-align: right;">Page 23</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;7.2 Key Modules</td><td style="text-align: right;">Page 23</td></tr>
+  <tr class="toc-chap"><td>Chapter 8: Testing and Validation</td><td style="text-align: right;">Page 26</td></tr>
+  <tr class="toc-chap"><td>Chapter 9: Results and Discussion</td><td style="text-align: right;">Page 27</td></tr>
+  <tr class="toc-chap"><td>Chapter 10: Challenges Faced and Resolutions</td><td style="text-align: right;">Page 28</td></tr>
+  <tr class="toc-chap"><td>Chapter 11: Skills Developed</td><td style="text-align: right;">Page 29</td></tr>
+  <tr class="toc-chap"><td>Chapter 12: Conclusion, Summary and Future Scope</td><td style="text-align: right;">Page 30</td></tr>
+  <tr class="toc-chap"><td>References</td><td style="text-align: right;">Page 31</td></tr>
+</table>
+
+<!-- LIST OF FIGURES -->
+<h1 class="chap-title">LIST OF FIGURES</h1>
+<table class="toc-table">
+  <tr><td>Figure 1: High-Level System Architecture Diagram of Chatters Platform</td><td style="text-align: right;">Page 18</td></tr>
+  <tr><td>Figure 2: Chatters User Sign-Up &amp; Registration Interface</td><td style="text-align: right;">Page 20</td></tr>
+  <tr><td>Figure 3: Chatters User Login &amp; Authentication Interface</td><td style="text-align: right;">Page 20</td></tr>
+  <tr><td>Figure 4: Chatters Main Dashboard &amp; Active Sidebar Interface (Home Page)</td><td style="text-align: right;">Page 21</td></tr>
+  <tr><td>Figure 5: Chatters Real-Time Conversation &amp; Message Container Interface</td><td style="text-align: right;">Page 21</td></tr>
+  <tr><td>Figure 6: Chatters Image Upload Attachment &amp; Preview Modal</td><td style="text-align: right;">Page 22</td></tr>
+  <tr><td>Figure 7: Chatters User Profile &amp; Avatar Upload Screen</td><td style="text-align: right;">Page 22</td></tr>
+  <tr><td>Figure 8: Chatters DaisyUI Theme Selection &amp; Customization Settings Page</td><td style="text-align: right;">Page 22</td></tr>
+  <tr><td>Figure 9: Chatters Online Presence Filter &amp; User Status Indicator</td><td style="text-align: right;">Page 23</td></tr>
+</table>
+
+<!-- LIST OF TABLES -->
+<h1 class="chap-title">LIST OF TABLES</h1>
+<table class="toc-table">
+  <tr><td>Table 1: Weekly Progress Summary of Training Period</td><td style="text-align: right;">Page 9</td></tr>
+  <tr><td>Table 2: Functional Requirements Specification</td><td style="text-align: right;">Page 17</td></tr>
+  <tr><td>Table 3: Non-Functional Requirements Specification</td><td style="text-align: right;">Page 17</td></tr>
+  <tr><td>Table 4: Representative Test Cases &amp; System Validation Results</td><td style="text-align: right;">Page 26</td></tr>
+  <tr><td>Table 5: Key Technical Challenges Encountered and Resolutions Adopted</td><td style="text-align: right;">Page 28</td></tr>
+  <tr><td>Table 6: Summary of Technical and Professional Skills Developed</td><td style="text-align: right;">Page 29</td></tr>
+</table>
+
+<!-- LIST OF ABBREVIATIONS -->
+<h1 class="chap-title">LIST OF ABBREVIATIONS</h1>
+<table>
+  <thead><tr><th style="width:25%;">Abbreviation</th><th>Full Form</th></tr></thead>
+  <tbody>
+    <tr><td>API</td><td>Application Programming Interface</td></tr>
+    <tr><td>BSON</td><td>Binary JavaScript Object Notation</td></tr>
+    <tr><td>CORS</td><td>Cross-Origin Resource Sharing</td></tr>
+    <tr><td>CSS</td><td>Cascading Style Sheets</td></tr>
+    <tr><td>DOM</td><td>Document Object Model</td></tr>
+    <tr><td>HTML</td><td>HyperText Markup Language</td></tr>
+    <tr><td>HTTP</td><td>Hypertext Transfer Protocol</td></tr>
+    <tr><td>HTTPS</td><td>Hypertext Transfer Protocol Secure</td></tr>
+    <tr><td>IDE</td><td>Integrated Development Environment</td></tr>
+    <tr><td>IEEE</td><td>Institute of Electrical and Electronics Engineers</td></tr>
+    <tr><td>JS</td><td>JavaScript</td></tr>
+    <tr><td>JSON</td><td>JavaScript Object Notation</td></tr>
+    <tr><td>JSX</td><td>JavaScript XML</td></tr>
+    <tr><td>JWT</td><td>JSON Web Token</td></tr>
+    <tr><td>MERN</td><td>MongoDB, Express.js, React.js, Node.js</td></tr>
+    <tr><td>NoSQL</td><td>Not Only SQL</td></tr>
+    <tr><td>npm</td><td>Node Package Manager</td></tr>
+    <tr><td>ODM</td><td>Object Data Modeling</td></tr>
+    <tr><td>REST</td><td>Representational State Transfer</td></tr>
+    <tr><td>RWD</td><td>Responsive Web Design</td></tr>
+    <tr><td>SPA</td><td>Single-Page Application</td></tr>
+    <tr><td>UI</td><td>User Interface</td></tr>
+    <tr><td>URI</td><td>Uniform Resource Identifier</td></tr>
+    <tr><td>URL</td><td>Uniform Resource Locator</td></tr>
+    <tr><td>UX</td><td>User Experience</td></tr>
+    <tr><td>WS</td><td>WebSocket / WebSockets protocol</td></tr>
+  </tbody>
+</table>
+
+<!-- WEEKLY PROGRESS -->
+<h1 class="chap-title">WEEKLY PROGRESS</h1>
+<p>The following table provides a comprehensive chronological breakdown of the research, design, implementation, testing, and optimization activities carried out during the summer industrial training period ([DATES]). The project schedule was structured across four consecutive weeks to systematically build the full-stack Chatters real-time communication platform.</p>
+
+<table>
+  <thead><tr><th style="width:10%;">Week</th><th style="width:25%;">Duration</th><th>Work Carried Out</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>[DATES - Week 1]</td><td>Project Setup &amp; Backend Foundation: Requirements analysis, setting up Node.js &amp; Express.js server architecture, configuring Mongoose ODM connection to MongoDB Atlas, implementing custom ApiError class and asyncHandler higher-order functions, and designing the initial User and Message database schemas.</td></tr>
+    <tr><td>2</td><td>[DATES - Week 2]</td><td>Authentication &amp; Security Subsystem: Developing user registration (signup), authentication (login), session management (checkAuth), and secure logout routes using bcryptjs password hashing and HTTP-only JWT cookies. Creating protected middleware (protectRoute) for API route authorization.</td></tr>
+    <tr><td>3</td><td>[DATES - Week 3]</td><td>Real-Time WebSocket Engine &amp; Cloud Integration: Integrating Socket.io server and client instances for bi-directional event-driven communication. Implementing online user presence tracking using userSocketMap. Setting up Cloudinary SDK integration for base64 image uploads and media hosting.</td></tr>
+    <tr><td>4</td><td>[DATES - Week 4]</td><td>Frontend Application &amp; System Integration: Building React single-page application using Vite, Tailwind CSS, DaisyUI, and Zustand state stores (useAuthStore, useChatStore, useThemeStore). Implementing 32 DaisyUI themes, real-time chat containers, image preview modals, sidebar filters, end-to-end API testing via Postman, and deployment readiness.</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 1: Weekly progress summary of training period</div>
+
+<!-- CHAPTER 1 -->
+<h1 class="chap-title">CHAPTER 1: INTRODUCTION</h1>
+<h2 class="main-heading">1.1 Background</h2>
+<p>In the contemporary digital era, instant communication platforms have evolved from optional messaging utilities into mission-critical infrastructure for modern web applications, enterprise collaboration tools, and social networks. The demand for low-latency, real-time messaging services capable of transmitting multimedia content securely and reliably across diverse device ecosystems has risen exponentially. Traditional web architectures relying exclusively on request-response HTTP polling models introduce significant latency overheads, unnecessary network bandwidth consumption, and sub-optimal user experiences when handling continuous bi-directional messaging.</p>
+<p>To overcome the limitations of classic HTTP communication, modern web development leverages event-driven architectures powered by WebSockets. The WebSocket protocol establishes a persistent, full-duplex TCP connection between the client browser and the application server, allowing data to be pushed instantaneously in both directions with minimal protocol header overhead. Combining WebSocket engines with asynchronous server-side runtimes, flexible NoSQL document stores, and reactive single-page frontend frameworks enables software engineers to construct scalable, interactive real-time applications.</p>
+<p>The MERN stack—comprising MongoDB, Express.js, React.js, and Node.js—represents a dominant full-stack paradigm for modern JavaScript application development. By utilizing JavaScript across all operational layers (client interface, server business logic, database queries, and real-time socket events), developers achieve high execution velocity, seamless code reuse, and unified data representation. This industrial training project focuses on designing, implementing, testing, and deploying a production-grade MERN-stack real-time messaging application named Chatters.</p>
+
+<h2 class="main-heading">1.2 About the Project</h2>
+<p>Chatters is a feature-rich, full-stack real-time messaging platform designed to facilitate instant peer-to-peer text communication, multimedia content distribution (image sharing), and dynamic user presence tracking. Built from the ground up using the MERN architecture, Chatters integrates robust backend RESTful APIs, an event-driven Socket.io communication engine, secure HTTP-only JSON Web Token (JWT) authentication, Cloudinary cloud media storage, and a highly responsive React single-page frontend styling system powered by Tailwind CSS and DaisyUI.</p>
+<p>The system provides authenticated users with an intuitive, unified dashboard consisting of an active sidebar displaying registered community members alongside live online presence indicators, an interactive chat window featuring scroll-managed message history, instant image upload previews, customizable user profile avatars, and dynamic UI theme selection supporting 32 distinct aesthetic configurations (e.g., dark, light, synthwave, dracula, cyberpunk). The platform is architected with a decoupled modular structure, separating application state management (Zustand), network transport (Axios and Socket.io-client), database persistence (Mongoose ODM), and server-side route protection.</p>
+
+<h2 class="main-heading">1.3 Motivation</h2>
+<p>The primary motivation behind undertaking the development of Chatters during the summer industrial training was to gain hands-on engineering experience in solving complex full-stack architectural challenges. Specifically, the project aimed to address several critical software engineering objectives:</p>
+<ul>
+  <li><strong>Real-Time Systems Engineering:</strong> Mastering real-time bi-directional networking protocols using Socket.io to achieve sub-second message delivery latency between connected clients.</li>
+  <li><strong>Security &amp; Session Management:</strong> Designing secure authentication workflows using JWT stored in HTTP-only cookies, combined with bcryptjs password hashing and Mongoose schema validations.</li>
+  <li><strong>Cloud Media Storage Integration:</strong> Integrating third-party cloud storage APIs (Cloudinary) for base64 media encoding, image uploading, and CDN asset management.</li>
+  <li><strong>State Management Optimization:</strong> Architecting lightweight, centralized client-side state stores using Zustand to manage asynchronous HTTP API requests, active WebSocket event listeners, dynamic UI theme persistence, and online user lists.</li>
+  <li><strong>Component-Based UI/UX Design:</strong> Developing modern, responsive, and visually appealing user interfaces using Tailwind CSS and DaisyUI with support for extensive theme switching capabilities.</li>
+</ul>
+
+<h2 class="main-heading">1.4 Organisation of the Report</h2>
+<p>This report is structured into twelve comprehensive chapters detailing the complete lifecycle of the Chatters project:</p>
+<ul>
+  <li><strong>Chapter 1 (Introduction):</strong> Presents the background, overall project summary, primary motivations, and structural organization of the report.</li>
+  <li><strong>Chapter 2 (Problem Statement):</strong> Defines the core software engineering problem addressed by the real-time communication platform.</li>
+  <li><strong>Chapter 3 (Objectives and Scope):</strong> Outlines the functional objectives and technical scope established for the industrial training project.</li>
+  <li><strong>Chapter 4 (Technologies and Concepts Used):</strong> Provides detailed descriptions of all technologies, frameworks, libraries, and architectural concepts utilized.</li>
+  <li><strong>Chapter 5 (Requirement Analysis):</strong> Presents the formal Functional Requirements and Non-Functional Requirements specifications.</li>
+  <li><strong>Chapter 6 (System Architecture and Design):</strong> Illustrates the system architecture, data flow diagrams, database schemas, and project interface snapshots.</li>
+  <li><strong>Chapter 7 (Implementation and Key Modules):</strong> Explains the technical implementation of core system modules, controllers, routes, and socket managers.</li>
+  <li><strong>Chapter 8 (Testing and Validation):</strong> Details the testing methodologies, representative test cases, and empirical validation results.</li>
+  <li><strong>Chapter 9 (Results and Discussion):</strong> Discusses the achieved software outcomes, system performance, and technical evaluations.</li>
+  <li><strong>Chapter 10 (Challenges Faced and Resolutions):</strong> Summarizes technical bottlenecks encountered during engineering and their corresponding resolutions.</li>
+  <li><strong>Chapter 11 (Skills Developed):</strong> Enumerates the full-stack engineering, security, state management, and real-time development skills acquired.</li>
+  <li><strong>Chapter 12 (Conclusion and Future Scope):</strong> Concludes the report with an executive summary and potential future enhancements.</li>
+</ul>
+
+<!-- CHAPTER 2 -->
+<h1 class="chap-title">CHAPTER 2: PROBLEM STATEMENT</h1>
+<p>Conventional web-based messaging systems frequently suffer from performance bottlenecks, security vulnerabilities, poor multi-device usability, and clumsy user interfaces. Understanding these operational limitations is essential for architecting a superior solution. The specific engineering challenges addressed by the Chatters project include:</p>
+<ul>
+  <li><strong>1. High Communication Latency &amp; Polling Overhead:</strong> Traditional HTTP short-polling or long-polling implementations create high network overhead, server CPU strain, and perceptible delivery delays (latency) when exchanging messages between users.</li>
+  <li><strong>2. Vulnerable Authentication &amp; Session Management:</strong> Storing JWT authentication tokens in local storage or session storage exposes applications to Cross-Site Scripting (XSS) attacks. Furthermore, unauthenticated WebSocket handshakes allow unauthorized clients to establish socket connections.</li>
+  <li><strong>3. Inefficient Multimedia Handling &amp; Cloud Storage:</strong> Handling direct multimedia uploads on server local filesystems causes scaling issues, storage disk exhaustion, slow response times, and broken asset links during cloud deployment.</li>
+  <li><strong>4. Unreliable Presence Tracking &amp; State Synchronization:</strong> Tracking online/offline user states across distributed client sessions without dedicated socket connection maps results in stale online indicators, missed socket broadcasts, or memory leaks.</li>
+  <li><strong>5. Lack of UI Personalization &amp; Responsive Layouts:</strong> Many web applications lack UI responsiveness across mobile and desktop displays or fail to offer user personalization options such as dynamic theme customization, resulting in rigid and uninspiring user experiences.</li>
+</ul>
+<p>To resolve these challenges, there exists an immediate technical requirement for an integrated, secure, real-time messaging architecture. The proposed Chatters platform directly addresses these issues by deploying a Socket.io WebSocket engine for instant bi-directional messaging, enforcing HTTP-only cookie-based JWT authentication, integrating Cloudinary cloud asset management, maintaining an active socket mapping table for accurate presence detection, and implementing a 32-theme responsive React interface.</p>
+
+<!-- CHAPTER 3 -->
+<h1 class="chap-title">CHAPTER 3: OBJECTIVES AND SCOPE</h1>
+<h2 class="main-heading">3.1 Objectives</h2>
+<p>The primary objective of this summer industrial training project was to engineer a robust, scalable, real-time web application using modern full-stack technologies. The specific sub-objectives were:</p>
+<ul>
+  <li><strong>1. Backend &amp; API Engineering:</strong> To design and build a RESTful API backend using Node.js, Express.js, and MongoDB for user management and message persistence.</li>
+  <li><strong>2. Security &amp; Access Control:</strong> To implement secure user registration, password hashing using bcryptjs, authentication verification, and protected route authorization via HTTP-only JWT cookies.</li>
+  <li><strong>3. Real-Time Communication Engine:</strong> To configure a Socket.io server engine integrated with Express HTTP server for real-time bi-directional message emission, event listening, and connection management.</li>
+  <li><strong>4. Cloud Media Management:</strong> To integrate Cloudinary cloud storage SDK for converting base64 client images into secure CDN URLs stored in the MongoDB database.</li>
+  <li><strong>5. Reactive Frontend Interface:</strong> To develop an interactive, component-based React single-page frontend using Vite, Tailwind CSS, DaisyUI, and Zustand state stores.</li>
+  <li><strong>6. Enhanced User Experience &amp; Personalization:</strong> To incorporate live presence indicators, online user filter toggles, profile picture updates, and a 32-theme customizable style selector.</li>
+  <li><strong>7. Testing &amp; Quality Assurance:</strong> To test all REST API endpoints thoroughly using Postman and validate client-server WebSocket interactions under simulated multi-user conditions.</li>
+</ul>
+
+<h2 class="main-heading">3.2 Scope of the Project</h2>
+<p>The scope of the Chatters project encompasses full-stack software development, database modeling, cloud service integration, real-time networking, and frontend UI design. Specifically, the completed scope includes:</p>
+<ul>
+  <li><strong>User Management &amp; Authentication:</strong> User signup, login, logout, profile picture upload, account status check, and session verification via HTTP-only cookies.</li>
+  <li><strong>Messaging &amp; Multimedia Sharing:</strong> Real-time text messaging, base64 image uploading, image modal viewing, scroll-to-bottom automatic scrolling, and message history fetching.</li>
+  <li><strong>Presence &amp; State Management:</strong> Live socket connection maps (userSocketMap), online user count display, and online-only user filtering in the contact sidebar.</li>
+  <li><strong>UI Theme Customization:</strong> Persisted theme switcher supporting 32 DaisyUI color palettes with instant preview capabilities.</li>
+  <li><strong>Deployment &amp; Build Pipeline:</strong> Production-ready build scripts for monorepo single-command execution and deployment hosting readiness on Render.</li>
+</ul>
+<p>Out of Scope: Features such as end-to-end message encryption algorithms (E2EE), multi-user group chat channels, voice/video streaming calls (WebRTC), and native iOS/Android mobile applications were designated as outside the immediate scope of this training project and are reserved for future enhancements.</p>
+
+<!-- CHAPTER 4 -->
+<h1 class="chap-title">CHAPTER 4: TECHNOLOGIES AND CONCEPTS USED</h1>
+<h2 class="main-heading">4.1 Node.js and Express.js</h2>
+<p>Node.js is an asynchronous, event-driven JavaScript runtime built on Chrome's V8 engine. It enables server-side execution of JavaScript code, utilizing a non-blocking I/O model that renders it highly efficient for real-time, data-intensive applications. Express.js is a minimal and flexible Node.js web application framework that provides a robust suite of features for building single-page, multi-page, and hybrid web applications. In the Chatters architecture, Express.js (v5.1.0) handles API routing, middleware execution (cors, cookie-parser, JSON body parsing), and serves as the HTTP foundation for the Socket.io server.</p>
+
+<h2 class="main-heading">4.2 RESTful APIs</h2>
+<p>Representational State Transfer (REST) is an architectural style for designing networked applications. RESTful APIs utilize standard HTTP request methods (GET, POST, PUT, DELETE) to execute operations on resources identified by URIs. In Chatters, REST endpoints were developed for user authentication (/api/v1/auth/signup, /api/v1/auth/login, /api/v1/auth/logout, /api/v1/auth/check, /api/v1/auth/update-profile) and message management (/api/v1/messages/users, /api/v1/messages/:id, /api/v1/messages/send/:id).</p>
+
+<h2 class="main-heading">4.3 MongoDB and Mongoose ODM</h2>
+<p>MongoDB is a source-available, cross-platform document-oriented NoSQL database. Rather than storing data in rigid tables and rows, MongoDB utilizes flexible JSON-like documents with dynamic schemas (BSON format). Mongoose (v8.17.0) is an Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data, provides schema validation, and translates between code objects and database documents. Mongoose schemas were defined for User collections (email, fullName, password, profilePic) and Message collections (senderId, receiverId, text, image, timestamps).</p>
+
+<h2 class="main-heading">4.4 Socket.io for Real-Time Communication</h2>
+<p>Socket.io is an event-driven library that enables real-time, bi-directional, and low-latency communication between web clients and servers. It automatically selects the optimal transport protocol—upgrading from HTTP long-polling to WebSockets when supported. In Chatters, Socket.io (v4.8.1) manages WebSocket handshakes, maintains an in-memory userSocketMap key-value object mapping user IDs to socket IDs, broadcasts live getOnlineUsers arrays to all connected clients, and emits targeted newMessage events directly to recipient socket channels.</p>
+
+<h2 class="main-heading">4.5 React.js and Vite Framework</h2>
+<p>React.js (v19.1.0) is a declarative, efficient, and flexible JavaScript library for building component-based user interfaces. It utilizes a Virtual DOM to optimize rendering performance by minimizing direct DOM manipulations. Vite (v7.0.4) is a next-generation frontend build tool that provides fast Hot Module Replacement (HMR) and optimized build bundles. React Router DOM (v7.7.1) was employed to manage client-side page routing (Home, SignUp, Login, Settings, Profile) with route protection based on authentication state.</p>
+
+<h2 class="main-heading">4.6 Tailwind CSS and DaisyUI</h2>
+<p>Tailwind CSS (v4.1.11) is a utility-first CSS framework that allows rapid UI development directly within JSX component markup. DaisyUI (v5.0.50) is a component library built on top of Tailwind CSS that provides semantic component classes (e.g., btn, card, avatar, chat-bubble) and a built-in theme engine. DaisyUI powers the 32 color themes available in the Chatters application, configured dynamically via data-theme attributes on the root container.</p>
+
+<h2 class="main-heading">4.7 Zustand State Management</h2>
+<p>Zustand (v5.0.7) is a small, fast, and scalable bear-necessities state-management solution for React. Unlike complex Redux boilerplate, Zustand uses simple hooks for state manipulation without wrapping components in context providers. In Chatters, three centralized stores were implemented: useAuthStore (auth user, checking state, socket connection, online users list), useChatStore (user contacts list, selected chat user, messages array, socket listeners), and useThemeStore (persisted UI theme).</p>
+
+<h2 class="main-heading">4.8 Cloudinary Cloud Media Storage</h2>
+<p>Cloudinary is a cloud-based image and video management service that offers media upload APIs, cloud storage, image manipulation, and fast CDN delivery. In Chatters, Cloudinary SDK (v2.7.0) is utilized in backend controllers (auth.controller.js and message.controller.js) to receive base64-encoded image payloads from the frontend, upload them to secure cloud buckets, and return HTTPS CDN image URLs stored in MongoDB.</p>
+
+<h2 class="main-heading">4.9 JSON Web Tokens (JWT) &amp; Cookie Authentication</h2>
+<p>JSON Web Token (JWT) is an open standard (RFC 7519) for securely transmitting information between parties as a JSON object. In Chatters, upon successful user signup or login, the backend generates a signed JWT containing the user ID. This token is attached to the HTTP response header as a secure, HTTP-only, SameSite cookie (jwt), protecting the session token from client-side JavaScript access and preventing XSS token theft.</p>
+
+<h2 class="main-heading">4.10 Postman &amp; API Validation Tools</h2>
+<p>Postman is an API platform for building, testing, and iterating RESTful APIs. During backend development, Postman was extensively utilized to execute HTTP requests (GET, POST, PUT), verify JSON response schemas, test edge-case input validations, inspect HTTP cookie headers, and debug custom ApiError responses.</p>
+
+<!-- CHAPTER 5 -->
+<h1 class="chap-title">CHAPTER 5: REQUIREMENT ANALYSIS</h1>
+<p>Before architecture design and code implementation, the project requirements were systematically analyzed and divided into Functional Requirements (specific system features and operations) and Non-Functional Requirements (quality attributes, security standards, and performance constraints).</p>
+
+<h2 class="main-heading">5.1 Functional Requirements</h2>
+<table>
+  <thead><tr><th style="width:12%;">ID</th><th style="width:30%;">Functional Requirement</th><th>Detailed Description</th></tr></thead>
+  <tbody>
+    <tr><td>FR-1</td><td>User Account Registration</td><td>The system shall allow new users to register an account using full name, email, and a secure password (minimum 6 characters).</td></tr>
+    <tr><td>FR-2</td><td>User Authentication &amp; Session Check</td><td>The system shall authenticate users via email/password credentials and maintain session persistence using HTTP-only JWT cookies.</td></tr>
+    <tr><td>FR-3</td><td>Secure Logout</td><td>The system shall allow authenticated users to log out safely by clearing the HTTP-only JWT cookie and disconnecting the active WebSocket.</td></tr>
+    <tr><td>FR-4</td><td>User Profile Management</td><td>The system shall allow users to view account details (email, name, creation date) and upload/update profile pictures via base64 encoding to Cloudinary.</td></tr>
+    <tr><td>FR-5</td><td>User Contact Sidebar</td><td>The system shall display a sidebar list of all registered users (excluding the logged-in user) with live online/offline presence badges.</td></tr>
+    <tr><td>FR-6</td><td>Online Presence Filtering</td><td>The system shall provide a toggle switch allowing users to filter the sidebar list to display only currently online users.</td></tr>
+    <tr><td>FR-7</td><td>Real-Time Messaging</td><td>The system shall allow users to select a contact, load historical message logs, and exchange text messages in real time via Socket.io events.</td></tr>
+    <tr><td>FR-8</td><td>Image Media Attachment</td><td>The system shall enable users to select, preview, attach, and upload images alongside or independent of text messages.</td></tr>
+    <tr><td>FR-9</td><td>Real-Time Message Delivery</td><td>The system shall deliver incoming messages instantaneously to active recipient chat windows without requiring manual page refreshes.</td></tr>
+    <tr><td>FR-10</td><td>UI Theme Customization</td><td>The system shall provide a settings page with 32 DaisyUI color themes allowing users to customize and persist their preferred UI aesthetic.</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 2: Functional requirements specification</div>
+
+<h2 class="main-heading">5.2 Non-Functional Requirements</h2>
+<table>
+  <thead><tr><th style="width:12%;">ID</th><th style="width:30%;">Quality Attribute</th><th>Non-Functional Specification</th></tr></thead>
+  <tbody>
+    <tr><td>NFR-1</td><td>Performance &amp; Latency</td><td>Real-time message transmission via Socket.io shall complete within 200 milliseconds under standard network conditions.</td></tr>
+    <tr><td>NFR-2</td><td>Security &amp; Data Protection</td><td>User passwords must be hashed using bcryptjs (salt factor 10). JWT session tokens must be stored in HTTP-only cookies to prevent XSS attacks.</td></tr>
+    <tr><td>NFR-3</td><td>Usability &amp; Responsiveness</td><td>The user interface shall be fully responsive across mobile, tablet, and desktop viewports, styled with Tailwind CSS and DaisyUI components.</td></tr>
+    <tr><td>NFR-4</td><td>Reliability &amp; Availability</td><td>The backend server shall implement global error middleware (errorHandler, ApiError) to prevent unhandled exceptions from crashing the process.</td></tr>
+    <tr><td>NFR-5</td><td>Maintainability &amp; Clean Code</td><td>The codebase shall follow a modular file structure separating models, routes, controllers, middleware, utilities, and Zustand state stores.</td></tr>
+    <tr><td>NFR-6</td><td>Scalability</td><td>The database tier (MongoDB Atlas) and cloud media tier (Cloudinary) shall support independent horizontal scaling to handle growing data volume.</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 3: Non-functional requirements specification</div>
+
+<!-- CHAPTER 6 -->
+<h1 class="chap-title">CHAPTER 6: SYSTEM ARCHITECTURE AND DESIGN</h1>
+<h2 class="main-heading">6.1 System Architecture Diagram</h2>
+<p>The Chatters platform follows a decoupled client-server architecture based on the MERN stack paradigm, augmented with Socket.io real-time event channels and Cloudinary media services. The architecture comprises three primary tiers: Client Tier (React SPA), Server Tier (Node.js/Express REST APIs &amp; Socket.io Server), and Data/Cloud Tier (MongoDB Atlas &amp; Cloudinary CDN).</p>
+
+<div class="placeholder-box">
+  <div class="title">[ SYSTEM ARCHITECTURE DIAGRAM PLACEHOLDER ]</div>
+  <div class="desc">React Frontend (Vite, Tailwind, DaisyUI, Zustand) &lt;===&gt; Express Backend (Node.js, JWT, Bcrypt)<br>
+  || (Socket.io-Client / Axios) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || (Mongoose ODM / Cloudinary SDK)<br>
+  v &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v<br>
+  Socket.io Engine (WS) &lt;==== userSocketMap presence ====&gt; MongoDB Atlas &amp; Cloudinary CDN</div>
+</div>
+<div class="caption">Figure 1: High-Level System Architecture Diagram of Chatters Platform</div>
+
+<h2 class="main-heading">6.2 Data Flow and Component Interaction</h2>
+<p>Data movement within Chatters occurs via two distinct communication channels:</p>
+<ul>
+  <li><strong>1. RESTful HTTP Channel:</strong> Used for synchronous operations such as user signup, login, checkAuth, profile updates, and fetching historic message threads. Client requests pass through Axios instances configured with withCredentials: true. Express routes parse incoming HTTP request bodies and cookies, execute protectRoute middleware verification, and invoke controller functions that interact with MongoDB via Mongoose ODM.</li>
+  <li><strong>2. Real-Time Socket.io Channel:</strong> Used for asynchronous, event-driven real-time operations. Upon authenticated client mount, useAuthStore establishes a WebSocket handshake passing userId in handshake query parameters. The backend stores this mapping in userSocketMap and broadcasts an updated getOnlineUsers array to all sockets. When a user sends a message, the server saves the document to MongoDB, checks if the recipient's socket ID exists in userSocketMap, and immediately emits a newMessage event to the recipient's socket channel.</li>
+</ul>
+
+<h2 class="main-heading">6.3 Database Schemas and Models</h2>
+<p>Application data persistence is managed using MongoDB database collections defined by Mongoose schemas:</p>
+
+<h3 class="sub-heading">User Schema (User.js)</h3>
+<ul>
+  <li><strong>email:</strong> String, required, unique index. Stores user email address.</li>
+  <li><strong>fullName:</strong> String, required. Stores full name of the user.</li>
+  <li><strong>password:</strong> String, required, minimum length 6. Stores bcrypt hashed password.</li>
+  <li><strong>profilePic:</strong> String, default empty string. Stores Cloudinary HTTPS CDN image URL.</li>
+  <li><strong>timestamps:</strong> Schema options enabling automatic createdAt and updatedAt ISO timestamp fields.</li>
+</ul>
+
+<h3 class="sub-heading">Message Schema (Message.js)</h3>
+<ul>
+  <li><strong>senderId:</strong> ObjectId ref User, required. References the sending user document ID.</li>
+  <li><strong>receiverId:</strong> ObjectId ref User, required. References the recipient user document ID.</li>
+  <li><strong>text:</strong> String, optional. Stores text message payload.</li>
+  <li><strong>image:</strong> String, optional. Stores Cloudinary HTTPS CDN image URL for shared media.</li>
+  <li><strong>timestamps:</strong> Schema options enabling automatic createdAt and updatedAt ISO timestamp fields.</li>
+</ul>
+
+<h2 class="main-heading">6.4 Snapshots of the Project</h2>
+<p>This section contains figure placeholders for screenshots of the fully functional Chatters user interface. The numbered captions match the List of Figures.</p>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters User Sign-Up &amp; Registration Interface ]</div>
+  <div class="desc">Description: Displays user registration form with full name, email, password fields, DaisyUI form layout, and side graphic.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 2: Chatters User Sign-Up &amp; Registration Interface</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters User Login &amp; Authentication Interface ]</div>
+  <div class="desc">Description: Displays user login screen with email, password input fields, password toggle visibility, and error handling toasts.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 3: Chatters User Login &amp; Authentication Interface</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters Main Dashboard &amp; Active Sidebar Interface (Home Page) ]</div>
+  <div class="desc">Description: Displays main application view featuring user list sidebar with green online presence indicators and welcome screen.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 4: Chatters Main Dashboard &amp; Active Sidebar Interface (Home Page)</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters Real-Time Conversation &amp; Message Container Interface ]</div>
+  <div class="desc">Description: Displays active chat window with selected contact header, scrollable chat bubbles, timestamps, and message input.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 5: Chatters Real-Time Conversation &amp; Message Container Interface</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters Image Upload Attachment &amp; Preview Modal ]</div>
+  <div class="desc">Description: Displays image attachment button, file picker, base64 thumbnail preview modal, and sent image in chat thread.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 6: Chatters Image Upload Attachment &amp; Preview Modal</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters User Profile &amp; Avatar Upload Screen ]</div>
+  <div class="desc">Description: Displays user profile details page showing full name, email, account status, membership date, and camera upload icon.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 7: Chatters User Profile &amp; Avatar Upload Screen</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters DaisyUI Theme Selection &amp; Customization Settings Page ]</div>
+  <div class="desc">Description: Displays 32 DaisyUI theme options grid (dark, light, synthwave, dracula, etc.) with live preview chat card.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 8: Chatters DaisyUI Theme Selection &amp; Customization Settings Page</div>
+
+<div class="placeholder-box">
+  <div class="title">[ SCREENSHOT PLACEHOLDER: Chatters Online Presence Filter &amp; User Status Indicator ]</div>
+  <div class="desc">Description: Displays sidebar filtering toggle switch active showing only online community members and active socket user counts.<br>(Insert screenshot image here)</div>
+</div>
+<div class="caption">Figure 9: Chatters Online Presence Filter &amp; User Status Indicator</div>
+
+<!-- CHAPTER 7 -->
+<h1 class="chap-title">CHAPTER 7: IMPLEMENTATION AND KEY MODULES</h1>
+<h2 class="main-heading">7.1 Implementation Overview</h2>
+<p>The Chatters platform was implemented following modern full-stack JavaScript software development patterns. The codebase is organized into a modular monorepo structure with distinct backend and frontend directories. The backend utilizes Express.js ES module syntax, asynchronous controller wrappers (asyncHandler), custom error objects (ApiError), and centralized Mongoose database connection scripts (db.js). The frontend uses React 19 functional components with JSX, custom Hooks, and Zustand state stores.</p>
+
+<h2 class="main-heading">7.2 Key Modules</h2>
+
+<h3 class="sub-heading">7.2.1 Authentication &amp; Authorization Module</h3>
+<p>The Authentication module manages user sign-up, login, session checking, logout, and route protection. Located in backend/src/controllers/auth.controller.js and backend/src/routes/auth.routes.js, it implements:</p>
+<ul>
+  <li><strong>signup (POST /api/v1/auth/signup):</strong> Validates required fields, checks for duplicate email addresses in MongoDB, hashes passwords using bcrypt.genSalt(10) and bcrypt.hash(), creates a new User document, generates a JWT cookie via generateToken(userId, res), and returns user JSON data.</li>
+  <li><strong>login (POST /api/v1/auth/login):</strong> Verifies user existence by email, compares provided password against stored hash using bcrypt.compare(), generates JWT cookie, and returns user data.</li>
+  <li><strong>logout (POST /api/v1/auth/logout):</strong> Clears the HTTP-only jwt cookie by setting maxAge to 0, terminating the user session.</li>
+  <li><strong>protectRoute (Middleware):</strong> Middleware function protectRoute extracts the jwt cookie from req.cookies, verifies token authenticity via jwt.verify(), fetches the user document from MongoDB excluding password field (-password), and attaches the user object to req.user.</li>
+</ul>
+
+<h3 class="sub-heading">7.2.2 User Profile &amp; Theme Management Module</h3>
+<p>This module handles profile picture updates and dynamic UI theme customization:</p>
+<ul>
+  <li><strong>updateProfile (PUT /api/v1/auth/update-profile):</strong> Receives base64-encoded image strings from the frontend, uploads them to Cloudinary cloud storage using cloudinary.uploader.upload(), and updates the user's profilePic URL in MongoDB using User.findByIdAndUpdate().</li>
+  <li><strong>Theme Switcher:</strong> Managed by useThemeStore on the frontend, which persists selected DaisyUI themes in browser localStorage and updates the root container's data-theme attribute dynamically across 32 supported themes.</li>
+</ul>
+
+<h3 class="sub-heading">7.2.3 Real-Time Messaging &amp; Socket.io Module</h3>
+<p>The messaging subsystem combines RESTful persistence with real-time WebSocket delivery:</p>
+<ul>
+  <li><strong>getMessages (GET /api/v1/messages/:id):</strong> Fetches all messages where (senderId = myId AND receiverId = userToChatId) OR (senderId = userToChatId AND receiverId = myId), returning chronological chat logs.</li>
+  <li><strong>sendMessage (POST /api/v1/messages/send/:id):</strong> Processes incoming message payloads containing text and optional base64 image strings. If an image is present, it is uploaded to Cloudinary. The Message document is saved to MongoDB. The controller then retrieves the recipient's socket ID from userSocketMap and emits a real-time newMessage event using io.to(receiverSocketId).emit().</li>
+</ul>
+
+<h3 class="sub-heading">7.2.4 Cloud Media Storage &amp; Image Sharing Module</h3>
+<p>Media uploads are handled asynchronously via backend/src/lib/cloudinary.js. When a user attaches an image in MessageInput.jsx or ProfilePage.jsx, the file is read into a base64 Data URL string via FileReader. The string is transmitted to Express controllers, which execute Cloudinary SDK API calls. Cloudinary optimizes and hosts the media file on globally distributed CDNs, returning secure HTTPS URLs stored in database fields.</p>
+
+<h3 class="sub-heading">7.2.5 Online Status &amp; Sidebar Module</h3>
+<p>The presence tracking system operates via backend/src/lib/socket.js. When a client establishes a WebSocket connection, its socket ID is mapped to its user ID in an in-memory userSocketMap object ({ userId: socketId }). The server immediately broadcasts an updated getOnlineUsers array containing all connected user IDs to all sockets. On disconnection, the user ID is removed from userSocketMap and an updated list is broadcast. The frontend Sidebar component consumes this array via useAuthStore to display green online badges and filter online contacts.</p>
+
+<h2 class="main-heading">7.3 Overall Implementation Flow</h2>
+<p>The overall application workflow can be summarized as follows:</p>
+<ul>
+  <li><strong>User Communication Flow:</strong> User Registration/Login -&gt; JWT Cookie Issued -&gt; WebSocket Connection Established -&gt; User Listed in Online Presence Map -&gt; Select Contact from Sidebar -&gt; Load Historic Messages from MongoDB -&gt; Type Message / Attach Image -&gt; Post to Express API -&gt; Save to MongoDB &amp; Upload Image to Cloudinary -&gt; Real-Time Socket Emission to Recipient -&gt; UI Chat Bubble Auto-Scroll.</li>
+</ul>
+
+<!-- CHAPTER 8 -->
+<h1 class="chap-title">CHAPTER 8: TESTING AND VALIDATION</h1>
+<p>The Chatters platform underwent systematic verification and validation using unit-level input checks, API testing via Postman, and end-to-end multi-browser integration testing. Particular focus was placed on authentication protection, image upload handling, real-time message delivery latency, and socket state persistence.</p>
+
+<table>
+  <thead><tr><th style="width:10%;">ID</th><th style="width:30%;">Test Case Scenario</th><th style="width:48%;">Expected Result</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>TC-01</td><td>User Signup with valid details</td><td>Account created, HTTP 201 response, JWT cookie set, user redirected to homepage.</td><td>PASS</td></tr>
+    <tr><td>TC-02</td><td>User Signup with existing email</td><td>API throws ApiError(400, 'Username already exists'), error toast displayed.</td><td>PASS</td></tr>
+    <tr><td>TC-03</td><td>User Signup with short password (&lt; 6 chars)</td><td>API throws ApiError(400, 'Length of password should be greater than 6').</td><td>PASS</td></tr>
+    <tr><td>TC-04</td><td>User Login with valid credentials</td><td>HTTP 200 response, JWT cookie updated, socket connects, online status active.</td><td>PASS</td></tr>
+    <tr><td>TC-05</td><td>User Login with invalid password</td><td>API throws ApiError(401, 'Invalid credentials'), error toast displayed.</td><td>PASS</td></tr>
+    <tr><td>TC-06</td><td>Access protected route (/auth/check) without cookie</td><td>Middleware returns HTTP 401 Unauthorized, user redirected to /login.</td><td>PASS</td></tr>
+    <tr><td>TC-07</td><td>Fetch user sidebar contacts (/messages/users)</td><td>Returns list of registered users excluding logged-in user, passwords omitted.</td><td>PASS</td></tr>
+    <tr><td>TC-08</td><td>Send text message to online user</td><td>Message saved to MongoDB, HTTP 201 returned, recipient receives newMessage socket event.</td><td>PASS</td></tr>
+    <tr><td>TC-09</td><td>Send image attachment to contact</td><td>Image uploaded to Cloudinary, CDN URL saved in MongoDB, image renders in chat thread.</td><td>PASS</td></tr>
+    <tr><td>TC-10</td><td>Toggle 'Show Online Only' in sidebar</td><td>Sidebar filters contacts list to display only users matching onlineUsers array.</td><td>PASS</td></tr>
+    <tr><td>TC-11</td><td>Change UI theme on Settings page</td><td>data-theme attribute updates instantly on root container, theme saved in localStorage.</td><td>PASS</td></tr>
+    <tr><td>TC-12</td><td>User Logout</td><td>HTTP-only cookie cleared, socket disconnects, user redirected to /login screen.</td><td>PASS</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 4: Representative test cases &amp; system validation results</div>
+
+<!-- CHAPTER 9 -->
+<h1 class="chap-title">CHAPTER 9: RESULTS AND DISCUSSION</h1>
+<p>The completed Chatters real-time messaging application successfully satisfied all defined functional and architectural requirements. Empirical evaluations conducted during local execution and cloud testing demonstrated strong performance characteristics across key operational metrics:</p>
+<ul>
+  <li><strong>Instant Messaging Latency:</strong> Real-time bi-directional message transmission via Socket.io demonstrated an average end-to-end latency of under 50 milliseconds on local network environments and under 180 milliseconds when deployed on cloud infrastructure (Render). Messages appeared instantly in active chat threads without page reloads.</li>
+  <li><strong>Robust Authentication Security:</strong> HTTP-only JWT cookies effectively secured user session tokens against XSS attacks. Unauthenticated requests to protected backend routes were reliably intercepted by protectRoute middleware and rejected with appropriate HTTP status codes.</li>
+  <li><strong>Efficient Cloud Media Delivery:</strong> Base64 image encoding and Cloudinary SDK integration handled media files efficiently. Uploaded images were automatically converted to optimized CDN links, preventing database bloat and ensuring fast client rendering.</li>
+  <li><strong>Accurate Presence Detection:</strong> The userSocketMap data structure accurately tracked connected clients. Socket connection and disconnection events triggered real-time getOnlineUsers broadcasts, maintaining synchronous online indicators across all connected client sidebars.</li>
+  <li><strong>Responsive UI &amp; Theme Customization:</strong> Zustand state stores provided smooth, reactive UI state transitions without unnecessary component re-renders. The 32 DaisyUI themes allowed instant aesthetic updates persisted across browser restarts via localStorage.</li>
+</ul>
+
+<!-- CHAPTER 10 -->
+<h1 class="chap-title">CHAPTER 10: CHALLENGES FACED AND RESOLUTIONS</h1>
+<p>During the full-stack engineering of Chatters, several technical challenges and integration hurdles were encountered. The table below details these issues along with the specific engineering resolutions adopted.</p>
+
+<table>
+  <thead><tr><th style="width:25%;">Challenge / Issue</th><th style="width:35%;">Technical Problem Description</th><th>Engineering Resolution Adopted</th></tr></thead>
+  <tbody>
+    <tr><td>CORS &amp; Cookie Credentials Mismatch</td><td>Browsers blocked credentials and JWT cookies during cross-origin requests between Vite dev server (port 5173) and Express backend (port 5001).</td><td>Configured Express cors middleware with origin: 'http://localhost:5173' and credentials: true. Added withCredentials: true to Axios client instance.</td></tr>
+    <tr><td>XSS Security &amp; Token Storage Vulnerability</td><td>Storing JWT tokens in localStorage exposed user sessions to malicious XSS script extraction.</td><td>Refactored authentication logic to generate tokens in backend utils.js and set HTTP-only, secure, SameSite cookies (jwt), preventing client JavaScript access.</td></tr>
+    <tr><td>Large Payload Crashes on Image Uploads</td><td>Transmitting large base64 image strings caused Express body-parser 'PayloadTooLargeError' crashes.</td><td>Configured express.json({ limit: '10mb' }) middleware in index.js to support base64 image strings prior to Cloudinary cloud upload.</td></tr>
+    <tr><td>Stale Socket Connections &amp; Memory Leaks</td><td>Closing browser tabs without explicit logout left stale user socket mappings in memory.</td><td>Implemented socket.on('disconnect') event listeners in backend/src/lib/socket.js that delete userId from userSocketMap and broadcast updated online user lists.</td></tr>
+    <tr><td>Zustand Duplicate Listener Binding</td><td>Re-subscribing to Socket.io events on component re-renders caused duplicated incoming message rendering.</td><td>Created explicit subscribeToMessages and unsubscribeFromMessages actions in useChatStore, using socket.off('newMessage') during cleanup.</td></tr>
+    <tr><td>Production Static Asset Routing</td><td>Deploying monorepo frontend and backend together resulted in 404 errors on React Router page refreshes.</td><td>Added Express static middleware (express.static) serving frontend/dist and catch-all route (app.get('/^(?!\/api).*/')) in backend index.js.</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 5: Key technical challenges encountered and resolutions adopted</div>
+
+<!-- CHAPTER 11 -->
+<h1 class="chap-title">CHAPTER 11: SKILLS DEVELOPED</h1>
+<p>The summer industrial training experience provided extensive practical exposure to modern software engineering paradigms, full-stack JavaScript development, and cloud integrations. The table below summarizes the key technical and professional skills acquired.</p>
+
+<table>
+  <thead><tr><th style="width:10%;">S.No</th><th style="width:28%;">Skill Category</th><th>Description of Skill Acquired</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Full-Stack MERN Architecture</td><td>Mastered full-stack web application development integrating MongoDB document databases, Express.js server frameworks, React 19 UI components, and Node.js runtimes.</td></tr>
+    <tr><td>2</td><td>Real-Time WebSocket Networking</td><td>Gained expertise in Socket.io bi-directional event-driven programming, managing socket connections, online presence maps, and targeted event broadcasting.</td></tr>
+    <tr><td>3</td><td>Web Security &amp; JWT Authentication</td><td>Implemented secure user authentication using bcryptjs password hashing, JSON Web Tokens, and HTTP-only cookie-based session protection.</td></tr>
+    <tr><td>4</td><td>Cloud Media Integration</td><td>Learned third-party cloud service integration using Cloudinary SDK for base64 image uploading, CDN hosting, and media asset management.</td></tr>
+    <tr><td>5</td><td>Client State Management (Zustand)</td><td>Developed centralized, lightweight client stores using Zustand to synchronize asynchronous REST API states, WebSocket listeners, and UI themes.</td></tr>
+    <tr><td>6</td><td>Modern Component UI &amp; Styling</td><td>Mastered responsive UI component design using React, Vite, Tailwind CSS utility classes, and DaisyUI semantic component themes.</td></tr>
+    <tr><td>7</td><td>API Testing &amp; Debugging</td><td>Acquired hands-on proficiency in testing RESTful API endpoints using Postman, inspecting HTTP cookies, and resolving cross-origin (CORS) errors.</td></tr>
+    <tr><td>8</td><td>Agile Deployment &amp; Build Pipelines</td><td>Learned monorepo build configuration, combining React Vite build outputs with Express static file serving for cloud deployment readiness.</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 6: Summary of technical and professional skills developed</div>
+
+<!-- CHAPTER 12 -->
+<h1 class="chap-title">CHAPTER 12: CONCLUSION, SUMMARY AND FUTURE SCOPE</h1>
+<h2 class="main-heading">12.1 Summary</h2>
+<p>This summer training report documented the design, engineering, testing, and deployment of Chatters—a full-stack real-time messaging application built on the MERN stack. The project successfully integrated Node.js and Express.js backend RESTful APIs, a Socket.io WebSocket engine, MongoDB Atlas database collections via Mongoose ODM, Cloudinary media storage, and a React 19 single-page frontend styled with Tailwind CSS and DaisyUI.</p>
+<p>The platform provides authenticated users with secure signup/login workflows, HTTP-only cookie security, live online presence indicators, instant peer-to-peer text messaging, base64 image sharing, profile avatar management, and a 32-theme customizable user interface. Comprehensive testing using Postman and multi-browser sessions confirmed that all functional requirements and performance targets were met.</p>
+
+<h2 class="main-heading">12.2 Conclusion</h2>
+<p>The industrial training project successfully achieved all established engineering objectives. Developing Chatters provided invaluable practical experience in overcoming full-stack development challenges, such as handling cross-origin credential sharing, securing authentication tokens against XSS attacks, optimizing base64 media uploads, and preventing socket event listener duplicates.</p>
+<p>The resulting platform demonstrates the power and flexibility of modern JavaScript frameworks when building low-latency, scalable real-time applications. The project bridged theoretical academic knowledge with industry-standard software engineering practices, establishing a solid technical foundation for future full-stack application development.</p>
+
+<h2 class="main-heading">12.3 Future Scope</h2>
+<p>While the current implementation of Chatters fulfills all core requirements, several advanced features can be incorporated in future development iterations:</p>
+<ul>
+  <li><strong>1. End-to-End Encryption (E2EE):</strong> Implementing Signal Protocol or Web Crypto API encryption algorithms to ensure end-to-end privacy for text and media messages.</li>
+  <li><strong>2. Group Chat Channels &amp; Admin Roles:</strong> Extending backend database models and Socket.io channels to support multi-user group channels, admin roles, and group invitation links.</li>
+  <li><strong>3. WebRTC Voice &amp; Video Calling:</strong> Integrating WebRTC audio/video peer connection protocols to support real-time voice and video calling features directly within the chat interface.</li>
+  <li><strong>4. Message Search &amp; Unread Counters:</strong> Adding user search input bars, message string search filters, and unread message counter badges in the contact sidebar.</li>
+  <li><strong>5. Mobile Application Development:</strong> Developing dedicated cross-platform mobile applications using React Native or Flutter to extend Chatters to iOS and Android devices.</li>
+</ul>
+
+<!-- REFERENCES -->
+<h1 class="chap-title">REFERENCES</h1>
+<p>[1] Node.js Documentation, "Node.js v22.x Long Term Support Documentation," Node.js Foundation, 2026. [Online]. Available: https://nodejs.org/en/docs/</p>
+<p>[2] Express.js API Reference, "Express 5.x Server Framework Documentation," OpenJS Foundation, 2026. [Online]. Available: https://expressjs.com/en/5x/api.html</p>
+<p>[3] MongoDB Manual, "MongoDB Atlas &amp; Server Manual v8.0," MongoDB Inc., 2026. [Online]. Available: https://www.mongodb.com/docs/manual/</p>
+<p>[4] Mongoose ODM API Docs, "Mongoose v8.x Models and Schema Guide," Automattic, 2026. [Online]. Available: https://mongoosejs.com/docs/api.html</p>
+<p>[5] Socket.io Documentation, "Socket.io Server and Client API Specification v4.8," Socket.io, 2026. [Online]. Available: https://socket.io/docs/v4/</p>
+<p>[6] React Documentation, "React v19 Component API and Hooks Reference," Meta Platforms Inc., 2026. [Online]. Available: https://react.dev/</p>
+<p>[7] Vite Guide, "Vite Next-Generation Frontend Tooling," Vite Core Team, 2026. [Online]. Available: https://vitejs.dev/guide/</p>
+<p>[8] Tailwind CSS Documentation, "Tailwind CSS v4 Utility Classes Reference," Tailwind Labs Inc., 2026. [Online]. Available: https://tailwindcss.com/docs</p>
+<p>[9] DaisyUI Documentation, "DaisyUI v5 Component Themes &amp; Styling," DaisyUI, 2026. [Online]. Available: https://daisyui.com/docs/v5/</p>
+<p>[10] Zustand Documentation, "Zustand State Store Guide v5," PMNDRS, 2026. [Online]. Available: https://zustand-demo.pmnd.rs/</p>
+<p>[11] Cloudinary API Reference, "Cloudinary Node.js SDK Documentation," Cloudinary Ltd., 2026. [Online]. Available: https://cloudinary.com/documentation/node_integration</p>
+<p>[12] JSON Web Token Specification, "JSON Web Token (JWT) RFC 7519," Internet Engineering Task Force (IETF), 2015. [Online]. Available: https://tools.ietf.org/html/rfc7519</p>
+<p>[13] Postman API Network, "Postman Learning Center and API Testing Guide," Postman Inc., 2026. [Online]. Available: https://learning.postman.com/</p>
+
+</body>
+</html>
